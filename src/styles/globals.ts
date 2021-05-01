@@ -8,10 +8,12 @@ import colors from './colors';
 
 export const StyleContainer = styled.div`
   display: grid;
-  min-height: 100%;
+  position: fixed;
   grid-template-rows: auto 1fr auto;
-  grid-template-columns: 100%;
+  grid-template-columns: 1fr;
   align-content: stretch;
+  width: 100vw;
+  height: 100vh;
   grid-template-areas:
     'header'
     'content'
