@@ -27,10 +27,18 @@ export const Content = styled.body`
   grid-area: content;
   overflow-y: auto;
   overflow-x: hidden;
-  padding-right: 14px;
-  padding-left: 14px;
   width: 100%;
-  background-color: ${colors.primary};
+  background-color: ${colors.orange};
   font: 16px 'Lato', sans-serif;
   color: ${colors.black};
+`;
+
+export const Wrapper = styled.div`
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  padding: 0 44px;
+  background-color: #ffffff;
+  border-radius: 26px 26px 0 0;
+  height: 100%;
 `;
