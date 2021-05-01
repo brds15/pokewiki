@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import colors from '../../styles/colors';
+import { ReactComponent as BrSVG } from '../../images/br.svg';
+import { ReactComponent as UsSVG } from '../../images/us.svg';
 
 export const Container = styled.div`
   padding: 14px 16px 0;
@@ -12,14 +14,17 @@ export const Container = styled.div`
 `;
 
 export const RightSide = styled.div`
+  display: flex;
   flex-direction: row;
   align-items: center;
+  width: 30%;
 `;
 
 export const LeftSide = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  width: 70%;
 `;
 
 export const Title = styled.h2`
@@ -27,6 +32,19 @@ export const Title = styled.h2`
   font-weight: 700;
 `;
 
-export const ButtonIcon = styled.div`
-  margin-left: 20px;
+export const ButtonLangIcon = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+`;
+
+export const UsIcon = styled(UsSVG)`
+  margin-left: 8px;
+  cursor: pointer;
+`;
+
+export const BrIcon = styled(BrSVG)`
+  cursor: pointer;
 `;
