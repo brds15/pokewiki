@@ -4,7 +4,7 @@ import { ReactComponent as BrSVG } from '../../images/br.svg';
 import { ReactComponent as UsSVG } from '../../images/us.svg';
 
 export const Container = styled.div`
-  padding: 14px 16px 0;
+  padding: 14px 16px;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
