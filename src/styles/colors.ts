@@ -5,6 +5,7 @@ const colors = {
   gray: '#7f7f8b',
   gray2: '#3a3a44',
   blue: '#054f77',
+  blue2: '#2b96e8',
   yellow: '#f5ef22',
   orange: '#f52231',
 };
@@ -16,6 +17,7 @@ export const dark = {
   gray: '#7f7f8b',
   gray2: '#cec8c8',
   blue: '#054f77',
+  blue2: '#2b96e8',
   yellow: '#f5ef22',
   orange: '#f52231',
 };

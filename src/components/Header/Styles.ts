@@ -10,7 +10,7 @@ export const Container = styled.div`
   justify-content: space-between;
   display: flex;
   grid-area: header;
-  background-color: ${colors.orange};
+  background-color: ${colors.blue2};
 `;
 
 export const RightSide = styled.div`

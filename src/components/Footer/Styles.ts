@@ -11,6 +11,6 @@ export const Container = styled.footer`
   span {
     font-size: 0.7rem;
     font-weight: 400;
-    color: ${colors.orange};
+    color: ${colors.blue2};
   }
 `;

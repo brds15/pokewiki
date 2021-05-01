@@ -28,7 +28,7 @@ export const Content = styled.body`
   overflow-y: auto;
   overflow-x: hidden;
   width: 100%;
-  background-color: ${colors.orange};
+  background-color: ${colors.blue2};
   font: 16px 'Lato', sans-serif;
   color: ${colors.black};
 `;
