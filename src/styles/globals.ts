@@ -21,6 +21,14 @@ export const StyleContainer = styled.div`
   font: 16px 'Lato', sans-serif;
   color: ${colors.black};
   -webkit-font-smoothing: antialiased;
+  li {
+    list-style-type: none;
+  }
+  ,
+  ul {
+    margin: 0;
+    padding: 0;
+  }
 `;
 
 export const Content = styled.body`
@@ -28,7 +36,7 @@ export const Content = styled.body`
   overflow-y: auto;
   overflow-x: hidden;
   width: 100%;
-  background-color: ${colors.blue2};
+  background-color: ${colors.blue};
   font: 16px 'Lato', sans-serif;
   color: ${colors.black};
 `;
@@ -38,7 +46,7 @@ export const Wrapper = styled.div`
   margin: 0;
   overflow: hidden;
   padding: 0 44px;
-  background-color: #ffffff;
+  background-color: ${colors.blue2};
   border-radius: 26px 26px 0 0;
   height: 100%;
 `;
