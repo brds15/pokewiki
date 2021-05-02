@@ -31,7 +31,7 @@ export const StyleContainer = styled.div`
   }
 `;
 
-export const Content = styled.body`
+export const Content = styled.div`
   grid-area: content;
   overflow-y: auto;
   overflow-x: hidden;
