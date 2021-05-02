@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import colors from '../../styles/colors';
 import { ReactComponent as BrSVG } from '../../images/br.svg';
 import { ReactComponent as UsSVG } from '../../images/us.svg';
+import { ReactComponent as IconSVG } from '../../images/superball.svg';
 
 export const Container = styled.div`
   padding: 14px 16px;
@@ -10,7 +11,7 @@ export const Container = styled.div`
   justify-content: space-between;
   display: flex;
   grid-area: header;
-  background-color: ${colors.blue2};
+  background-color: ${colors.blue};
 `;
 
 export const RightSide = styled.div`
@@ -24,6 +25,7 @@ export const LeftSide = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  flex-wrap: nowrap;
   width: 70%;
 `;
 
@@ -47,4 +49,8 @@ export const UsIcon = styled(UsSVG)`
 
 export const BrIcon = styled(BrSVG)`
   cursor: pointer;
+`;
+
+export const IconHome = styled(IconSVG)`
+  margin-right: 11px;
 `;

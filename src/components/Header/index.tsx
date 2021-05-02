@@ -1,6 +1,15 @@
 import React from 'react';
-import { Container, RightSide, ButtonLangIcon, LeftSide, Title, BrIcon, UsIcon } from './Styles';
-import i18n from "i18next";
+import {
+  IconHome,
+  Container,
+  RightSide,
+  ButtonLangIcon,
+  LeftSide,
+  Title,
+  BrIcon,
+  UsIcon
+} from './Styles';
+import i18n from 'i18next';
 
 const Header = () => {
   const handleChangeLanguage = (language: string) => {
@@ -10,6 +19,7 @@ const Header = () => {
   return (
     <Container>
       <LeftSide>
+        <IconHome />
         <Title>PokeWiki</Title>
       </LeftSide>
 
