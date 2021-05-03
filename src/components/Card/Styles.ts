@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import colors from '../../styles/colors';
 
 export const Wrapper = styled.div`
-  background-color: ${colors.primary};
+  background-color: ${colors.blue};
   border-radius: 23px;
   padding: 15px 25px;
   display: flex;
@@ -19,7 +19,7 @@ export const Wrapper = styled.div`
 export const NameLabel = styled.span`
   width: 100%;
   text-align: center;
-  color: ${colors.blue};
+  color: ${colors.primary};
   font-weight: 700;
   text-transform: capitalize;
 `;
