@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { InputHTMLAttributes } from 'react';
 import { Option,TitleLabel } from './Styles';
 
-interface NavOptionProps {
+interface NavOptionProps extends InputHTMLAttributes<any>{
   title: string;
 }
 

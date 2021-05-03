@@ -34,16 +34,28 @@ const Home = () => {
     getGenerations().then(response => {
       console.log('response', response);
       setGenerationsList(response.results);
-      handleLoadGeneration(currentGeneration);
+      if (speciesList.length === 0) {
+        handleLoadGeneration(currentGeneration);
+      }
     });
-  }, [handleLoadGeneration, currentGeneration]);
+  }, [handleLoadGeneration, currentGeneration, speciesList.length]);
 
   return (
     <PageWrapper>
       <NavTab>
         {generationsList.length > 0 ? (
-          generationsList.map(({ name }, index) => {
-            return <NavOption key={index} title={name} />;
+          generationsList.map(({ name, url = '1/' }, index) => {
+            const urlArr = url.split('/');
+            console.log('id', urlArr);
+            const generationId = url[url.length - 2];
+            console.log('generationId', generationId);
+            return (
+              <NavOption
+                key={index}
+                title={name}
+                onClick={() => handleLoadGeneration(generationId)}
+              />
+            );
           })
         ) : (
           <>{blankMessage}</>
