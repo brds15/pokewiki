@@ -50,3 +50,8 @@ export const Wrapper = styled.div`
   border-radius: 26px 26px 0 0;
   height: 100%;
 `;
+
+export const PageWrapper = styled.div`
+  flex: 1;
+  padding: 50px 0;
+`;
