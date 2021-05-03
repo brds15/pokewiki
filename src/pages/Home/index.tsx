@@ -35,10 +35,10 @@ const Home = () => {
       console.log('response', response);
       setGenerationsList(response.results);
       if (speciesList.length === 0) {
-        handleLoadGeneration(currentGeneration);
+        handleLoadGeneration('1');
       }
     });
-  }, [handleLoadGeneration, currentGeneration, speciesList.length]);
+  }, [handleLoadGeneration, speciesList.length]);
 
   return (
     <PageWrapper>
