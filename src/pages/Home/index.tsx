@@ -20,6 +20,8 @@ interface SpeciesI {
   id: SpecieId;
 }
 
+const defaultGenerationUrl = 'https://pokeapi.co/api/v2/generation/1/';
+
 const Home = () => {
   const { t } = useTranslation();
   const [generationsList, setGenerationsList] = useState([]);
@@ -81,8 +83,9 @@ const Home = () => {
   useEffect(() => {
     if (generationsList.length === 0 && !speciesList[0].name) {
       getGenerations().then(response => {
+        console.log('response', response);
         setGenerationsList(response.results);
-        handleLoadGeneration('https://pokeapi.co/api/v2/generation/1/');
+        handleLoadGeneration(defaultGenerationUrl);
       });
     }
   }, [generationsList.length, handleLoadGeneration, speciesList]);
@@ -93,14 +96,13 @@ const Home = () => {
     <PageWrapper>
       <NavTab>
         {generationsList.length > 0 ? (
-          generationsList.map(({ name, url = '1/' }, index) => {
-            const urlArr = url.split('/');
-            const generationId = urlArr[urlArr.length - 2];
+          generationsList.map(({ name, url = defaultGenerationUrl }, index) => {
+            const generationNumber = index + 1;
             return (
               <NavOption
                 key={index}
-                title={name}
-                onClick={() => handleLoadGeneration(generationId)}
+                title={`${t('generation')} ${generationNumber}`}
+                onClick={() => handleLoadGeneration(url)}
               />
             );
           })
