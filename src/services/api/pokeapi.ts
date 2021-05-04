@@ -13,9 +13,9 @@ export const getGenerations = async () => {
   }
 };
 
-export const getGeneration = async (generationNumber: string) => {
+export const makeGetRequest = async (url: string) => {
   try {
-    const { data } = await axios.get(`${API_BASE}generation/${generationNumber}/`);
+    const { data } = await axios.get(`${url}`);
     return data;
   } catch (error) {
     alert(i18n.t('generalApiError'));

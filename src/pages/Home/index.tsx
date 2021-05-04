@@ -3,7 +3,7 @@ import { PageWrapper } from '../../styles/globals';
 import { Section } from './Styles';
 import { useTranslation } from 'react-i18next';
 import '../../services/translations/i18n';
-import { getGeneration, getGenerations } from '../../services/api/pokeapi';
+import { makeGetRequest, getGenerations } from '../../services/api/pokeapi';
 import NavOption from '../../components/NavOption';
 import NavTab from '../../components/NavTab';
 import Category from '../../components/Category';
@@ -47,8 +47,8 @@ const Home = () => {
   }, []);
 
   const handleLoadGeneration = useCallback(
-    (generationNumber: string) => {
-      getGeneration(generationNumber).then(response => {
+    (url: string) => {
+      makeGetRequest(url).then(response => {
         if (response && response.pokemon_species && response.pokemon_species.length > 0) {
           let idList: string[] = [];
 
@@ -82,7 +82,7 @@ const Home = () => {
     if (generationsList.length === 0 && !speciesList[0].name) {
       getGenerations().then(response => {
         setGenerationsList(response.results);
-        handleLoadGeneration('1');
+        handleLoadGeneration('https://pokeapi.co/api/v2/generation/1/');
       });
     }
   }, [generationsList.length, handleLoadGeneration, speciesList]);
