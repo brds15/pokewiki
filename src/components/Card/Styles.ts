@@ -22,4 +22,5 @@ export const NameLabel = styled.span`
   color: ${colors.primary};
   font-weight: 700;
   text-transform: capitalize;
+  margin-top: 10px;
 `;
