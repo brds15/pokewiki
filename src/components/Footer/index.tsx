@@ -1,10 +1,18 @@
-import { Container } from './Styles';
+import React from 'react';
+import { ResizeContainer, DetailContainer, FooterContainer, Wrapper, HoldIcon } from './Styles';
 
 const Footer = () => {
   return (
-    <Container>
-      <span>By brds15</span>
-    </Container>
+    <Wrapper>
+      <DetailContainer>
+        <ResizeContainer>
+          <HoldIcon />
+        </ResizeContainer>
+      </DetailContainer>
+      <FooterContainer>
+        <span>By brds15</span>
+      </FooterContainer>
+    </Wrapper>
   );
 };
 
