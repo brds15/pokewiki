@@ -1,4 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { PageWrapper } from '../../styles/globals';
+import { Section } from './Styles';
 import { useTranslation } from 'react-i18next';
 import '../../services/translations/i18n';
 import { getGeneration, getGenerations } from '../../services/api/pokeapi';
@@ -6,14 +8,25 @@ import NavOption from '../../components/NavOption';
 import NavTab from '../../components/NavTab';
 import Category from '../../components/Category';
 import Card from '../../components/Card/Card';
-import { PageWrapper } from '../../styles/globals';
-import { Section } from './Styles';
+import { getPokeImage } from '../../services/api/pokeres';
+
+type SpecieId = string;
+type Picture = JSX.Element;
+
+interface SpeciesI {
+  name: string;
+  url: string;
+  picture: Picture;
+  id: SpecieId;
+}
 
 const Home = () => {
   const { t } = useTranslation();
-  const [currentGeneration, setCurrentGeneration] = useState('1');
   const [generationsList, setGenerationsList] = useState([]);
-  const [speciesList, setSpeciesList] = useState([]);
+  const [speciesList, setSpeciesList] = useState<SpeciesI[]>([
+    { name: '', url: '', picture: <></>, id: '' }
+  ]);
+  const [pictureList, setPictureList] = useState([{}]);
 
   const blankMessage = useMemo((): JSX.Element => {
     return (
@@ -23,22 +36,58 @@ const Home = () => {
     );
   }, []);
 
-  const handleLoadGeneration = useCallback((generationNumber: string) => {
-    getGeneration(generationNumber).then(response => {
-      console.log('generation response', response);
-      setSpeciesList(response.pokemon_species);
+  const handlePictureList = useCallback((idList: string[]) => {
+    const promises = idList.map(id => {
+      return getPokeImage(id).then(response => ({
+        picture: <img alt={'pokeimage'} src={JSON.stringify(response)} height={55} width={55} />,
+        id: id
+      }));
     });
+    Promise.allSettled(promises).then(response => setPictureList(response));
   }, []);
 
+  const handleLoadGeneration = useCallback(
+    (generationNumber: string) => {
+      getGeneration(generationNumber).then(response => {
+        if (response && response.pokemon_species && response.pokemon_species.length > 0) {
+          let idList: string[] = [];
+
+          const newSpeciesList = response.pokemon_species.map((specie: SpeciesI) => {
+            const urlArr = specie.url.split('/');
+            const pokeId = urlArr[urlArr.length - 2];
+            idList = [...idList, pokeId];
+
+            return {
+              ...specie,
+              picture: (
+                <img
+                  width={60}
+                  height={60}
+                  src={`https://pokeres.bastionbot.org/images/pokemon/${pokeId}.png`}
+                  alt={specie.name}
+                />
+              ),
+              id: pokeId
+            };
+          });
+          handlePictureList(idList);
+          setSpeciesList(newSpeciesList);
+        }
+      });
+    },
+    [handlePictureList]
+  );
+
   useEffect(() => {
-    getGenerations().then(response => {
-      console.log('response', response);
-      setGenerationsList(response.results);
-      if (speciesList.length === 0) {
+    if (generationsList.length === 0 && !speciesList[0].name) {
+      getGenerations().then(response => {
+        setGenerationsList(response.results);
         handleLoadGeneration('1');
-      }
-    });
-  }, [handleLoadGeneration, speciesList.length]);
+      });
+    }
+  }, [generationsList.length, handleLoadGeneration, speciesList]);
+
+  useEffect(() => {}, [pictureList]);
 
   return (
     <PageWrapper>
@@ -46,9 +95,7 @@ const Home = () => {
         {generationsList.length > 0 ? (
           generationsList.map(({ name, url = '1/' }, index) => {
             const urlArr = url.split('/');
-            console.log('id', urlArr);
-            const generationId = url[url.length - 2];
-            console.log('generationId', generationId);
+            const generationId = urlArr[urlArr.length - 2];
             return (
               <NavOption
                 key={index}
@@ -64,8 +111,8 @@ const Home = () => {
       <Section>
         <Category title={t('species')}>
           {speciesList.length > 0 ? (
-            speciesList.map(({ name }, index) => {
-              return <Card key={index} title={name} />;
+            speciesList.map(({ name, url = '', picture, id }, index) => {
+              return <Card key={index} title={name} imageContainer={picture} />;
             })
           ) : (
             <>{blankMessage}</>
