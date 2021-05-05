@@ -54,7 +54,7 @@ export const Detail = () => {
 
             <BoxContainer>
               <Label>{t('habitat')}</Label>
-              <Value>{data.habitat}</Value>
+              <Value>{data.habitat ? data.habitat : ''}</Value>
             </BoxContainer>
           </ContentContainer>
         </Category>

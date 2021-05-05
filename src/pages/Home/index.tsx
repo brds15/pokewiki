@@ -118,14 +118,14 @@ const Home = () => {
       } = response;
 
       const detailObj = {
-        color: color.name,
+        color: color && color.name ? color.name : 'white',
         captureRate: capture_rate,
         id: id,
         isBaby: is_baby,
         isLegendary: is_lengendary,
         name: name,
         happiness: base_happiness,
-        habitat: habitat.name
+        habitat: habitat && habitat.name ? habitat.name : ''
       };
       changeAll(detailObj);
     });
