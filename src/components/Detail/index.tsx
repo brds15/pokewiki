@@ -4,14 +4,25 @@ import { DetailContext } from '../../context/DetailProvider';
 
 export const Detail = () => {
   const { data } = useContext(DetailContext);
-  console.log('data::', data);
-  return (
+
+  return data && data.name ? (
     <DetailContainer>
       <ResizeContainer>
         <HoldIcon />
       </ResizeContainer>
-      <div />
+      <div>
+        <span>color {data.color}</span>
+        <span>captureRate {data.captureRate}</span>
+        <span>id {data.id}</span>
+        <span>isBaby {data.isBaby}</span>
+        <span>isLegendary {data.isLegendary}</span>
+        <span>name {data.name}</span>
+        <span>happiness {data.happiness}</span>
+        <span>habitat {data.habitat}</span>
+      </div>
     </DetailContainer>
+  ) : (
+    <></>
   );
 };
 

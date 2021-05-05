@@ -15,6 +15,6 @@ export const HoldIcon = styled(HoldSVG)``;
 export const DetailContainer = styled.div`
   background-color: ${colors.primary};
   width: 100%;
-  height: 5vh;
+  height: 20vh;
   border-radius: 26px 26px 0 0;
 `;

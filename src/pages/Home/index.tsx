@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { PageWrapper } from '../../styles/globals';
 import { Section } from './Styles';
 import { useTranslation } from 'react-i18next';
@@ -9,6 +9,7 @@ import NavTab from '../../components/NavTab';
 import Category from '../../components/Category';
 import Card from '../../components/Card/Card';
 import { getPokeImage } from '../../services/api/pokeres';
+import { DetailContext } from '../../context/DetailProvider';
 
 type SpecieId = string;
 type Picture = JSX.Element;
@@ -30,6 +31,7 @@ const Home = () => {
     { name: '', url: '', picture: <></>, id: '' }
   ]);
   const [pictureList, setPictureList] = useState([{}]);
+  const { changeAll } = useContext(DetailContext);
 
   const blankMessage = useMemo((): JSX.Element => {
     return (
@@ -102,8 +104,31 @@ const Home = () => {
   };
 
   const handleClickSpecie = (url: string) => {
-    console.log('url::', url);
-    makeGetRequest(url).then(response => console.log('response', response));
+    makeGetRequest(url).then(response => {
+      console.log('response', response);
+      const {
+        color,
+        name,
+        capture_rate,
+        id,
+        is_lengendary,
+        is_baby,
+        base_happiness,
+        habitat
+      } = response;
+
+      const detailObj = {
+        color: color.name,
+        captureRate: capture_rate,
+        id: id,
+        isBaby: is_baby,
+        isLegendary: is_lengendary,
+        name: name,
+        happiness: base_happiness,
+        habitat: habitat.name
+      };
+      changeAll(detailObj);
+    });
   };
 
   return (
