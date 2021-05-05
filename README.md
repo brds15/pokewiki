@@ -41,6 +41,7 @@ yarn start # open localhost:3000
 - Use API for i18n
 - Add skeleton loader
 - Use cache features
+- Add tests
 - Add loader spinner
 - Show default image when error
 - Make each request image using callback
