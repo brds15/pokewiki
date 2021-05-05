@@ -23,3 +23,8 @@ yarn start # open localhost:3000
 ## Diary of developing / Diário do desenvolvimento
 
 ## To future / Para o futuro
+- Add filters
+- Apply for another languages
+- Use API for i18n
+- Add skeleton loader
+- Use cache features
