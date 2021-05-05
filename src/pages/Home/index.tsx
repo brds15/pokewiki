@@ -25,6 +25,7 @@ const defaultGenerationUrl = 'https://pokeapi.co/api/v2/generation/1/';
 const Home = () => {
   const { t } = useTranslation();
   const [generationsList, setGenerationsList] = useState([]);
+  const [generationIndexActive, setGenerationIndexActive] = useState(0);
   const [speciesList, setSpeciesList] = useState<SpeciesI[]>([
     { name: '', url: '', picture: <></>, id: '' }
   ]);
@@ -47,6 +48,10 @@ const Home = () => {
     });
     Promise.allSettled(promises).then(response => setPictureList(response));
   }, []);
+
+  const handleGenerationIndexActive = (index: number) => {
+    setGenerationIndexActive(index);
+  };
 
   const handleLoadGeneration = useCallback(
     (url: string) => {
@@ -81,16 +86,19 @@ const Home = () => {
   );
 
   useEffect(() => {
+    console.log('pictureList', pictureList);
     if (generationsList.length === 0 && !speciesList[0].name) {
       getGenerations().then(response => {
-        console.log('response', response);
         setGenerationsList(response.results);
         handleLoadGeneration(defaultGenerationUrl);
       });
     }
-  }, [generationsList.length, handleLoadGeneration, speciesList]);
+  }, [generationsList.length, handleLoadGeneration, pictureList, speciesList]);
 
-  useEffect(() => {}, [pictureList]);
+  const handleClickGeneration = (url: string, index: number) => {
+    handleLoadGeneration(url);
+    handleGenerationIndexActive(index);
+  };
 
   return (
     <PageWrapper>
@@ -102,7 +110,8 @@ const Home = () => {
               <NavOption
                 key={index}
                 title={`${t('generation')} ${generationNumber}`}
-                onClick={() => handleLoadGeneration(url)}
+                onClick={() => handleClickGeneration(url, index)}
+                isActive={generationIndexActive === index}
               />
             );
           })

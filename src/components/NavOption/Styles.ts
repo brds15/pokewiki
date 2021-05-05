@@ -1,13 +1,17 @@
 import styled from 'styled-components';
 import colors from '../../styles/colors';
 
-export const Option = styled.li`
+interface OptionI {
+  isActive: boolean;
+}
+
+export const Option = styled.li<OptionI>`
   border-radius: 50px;
   border-color: ${colors.white};
   border-style: solid;
   border-width: 1px;
   padding: 10px 20px;
-  background-color: ${colors.blue2};
+  background-color: ${props => (props.isActive ? colors.gray : colors.blue2)};
   cursor: pointer;
   margin-right: 13px;
   &:hover {
