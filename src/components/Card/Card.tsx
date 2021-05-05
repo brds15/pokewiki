@@ -1,15 +1,16 @@
-import React from 'react';
+import React, { InputHTMLAttributes } from 'react';
 import { Wrapper, NameLabel } from './Styles';
 import ImageLoader from '../ImageLoader';
 
-interface CardProps {
+interface CardProps extends InputHTMLAttributes<any> {
   title: string;
   imageContainer?: JSX.Element | JSX.Element[];
 }
 
-const Card = ({ title, imageContainer }: CardProps) => {
+const Card = (props: CardProps) => {
+  const { title, imageContainer } = props;
   return (
-    <Wrapper>
+    <Wrapper {...props}>
       {imageContainer || <ImageLoader />}
       <NameLabel>{title}</NameLabel>
     </Wrapper>

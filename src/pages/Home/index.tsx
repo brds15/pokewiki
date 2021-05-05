@@ -78,6 +78,7 @@ const Home = () => {
             };
           });
           handlePictureList(idList);
+          console.log('newSpeciesList', newSpeciesList);
           setSpeciesList(newSpeciesList);
         }
       });
@@ -98,6 +99,11 @@ const Home = () => {
   const handleClickGeneration = (url: string, index: number) => {
     handleLoadGeneration(url);
     handleGenerationIndexActive(index);
+  };
+
+  const handleClickSpecie = (url: string) => {
+    console.log('url::', url);
+    makeGetRequest(url).then(response => console.log('response', response));
   };
 
   return (
@@ -123,7 +129,14 @@ const Home = () => {
         <Category title={t('species')}>
           {speciesList.length > 0 ? (
             speciesList.map(({ name, url = '', picture, id }, index) => {
-              return <Card key={index} title={name} imageContainer={picture} />;
+              return (
+                <Card
+                  key={index}
+                  title={name}
+                  imageContainer={picture}
+                  onClick={() => handleClickSpecie(url)}
+                />
+              );
             })
           ) : (
             <>{blankMessage}</>
