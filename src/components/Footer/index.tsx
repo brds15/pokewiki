@@ -1,14 +1,11 @@
 import React from 'react';
-import { ResizeContainer, DetailContainer, FooterContainer, Wrapper, HoldIcon } from './Styles';
+import {   FooterContainer, Wrapper } from './Styles';
+import Detail from '../Detail';
 
 const Footer = () => {
   return (
     <Wrapper>
-      <DetailContainer>
-        <ResizeContainer>
-          <HoldIcon />
-        </ResizeContainer>
-      </DetailContainer>
+      <Detail />
       <FooterContainer>
         <span>By brds15</span>
       </FooterContainer>
