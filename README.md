@@ -4,6 +4,9 @@ Is a React app to show overview of each Pokemon generations
 
 É uma aplicação React que mostra um pouco sobre cada geração de Pokemon
 
+![Pokemon List](screenshots/shothome.png)
+![Pokemon List](screenshots/shotmobile.png)
+
 ## Getting started / Para começar
 Execute these below commands / Execute os seguintes comandos
 
@@ -32,7 +35,6 @@ yarn start # open localhost:3000
 
 - Havia criado um GET para resgatar os pokemons, por meio de uma função recebia um generationId. Mas vi que não fazia muito sentido, pois o response da api já tem a url completa para requisição. Portanto, criei uma função generica de requisição. Com isso o acoplamento diminui e deixou a requisição mais coesa.
 
-
 ## To future / Para o futuro
 - Add filters
 - Apply for another languages
@@ -42,3 +44,4 @@ yarn start # open localhost:3000
 - Add loader spinner
 - Show default image when error
 - Make each request image using callback
+- Make detail resized
