@@ -52,10 +52,12 @@ export const Detail = () => {
               <Value>{data.happiness}</Value>
             </BoxContainer>
 
-            <BoxContainer>
-              <Label>{t('habitat')}</Label>
-              <Value>{data.habitat ? data.habitat : ''}</Value>
-            </BoxContainer>
+            {data.habitat && (
+              <BoxContainer>
+                <Label>{t('habitat')}</Label>
+                <Value>{data.habitat ? data.habitat : ''}</Value>
+              </BoxContainer>
+            )}
           </ContentContainer>
         </Category>
       </Wrapper>
