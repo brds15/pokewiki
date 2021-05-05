@@ -3,12 +3,11 @@ import { PageWrapper } from '../../styles/globals';
 import { Section } from './Styles';
 import { useTranslation } from 'react-i18next';
 import '../../services/translations/i18n';
-import { makeGetRequest, getGenerations } from '../../services/api/pokeapi';
+import { getGenerations, makeGetRequest } from '../../services/api/pokeapi';
 import NavOption from '../../components/NavOption';
 import NavTab from '../../components/NavTab';
 import Category from '../../components/Category';
 import Card from '../../components/Card/Card';
-import { getPokeImage } from '../../services/api/pokeres';
 import { DetailContext } from '../../context/DetailProvider';
 
 type SpecieId = string;
@@ -30,7 +29,6 @@ const Home = () => {
   const [speciesList, setSpeciesList] = useState<SpeciesI[]>([
     { name: '', url: '', picture: <></>, id: '' }
   ]);
-  const [pictureList, setPictureList] = useState([{}]);
   const { changeAll } = useContext(DetailContext);
 
   const blankMessage = useMemo((): JSX.Element => {
@@ -41,62 +39,46 @@ const Home = () => {
     );
   }, []);
 
-  const handlePictureList = useCallback((idList: string[]) => {
-    const promises = idList.map(id => {
-      return getPokeImage(id).then(response => ({
-        picture: <img alt={'pokeimage'} src={JSON.stringify(response)} height={55} width={55} />,
-        id: id
-      }));
-    });
-    Promise.allSettled(promises).then(response => setPictureList(response));
-  }, []);
-
   const handleGenerationIndexActive = (index: number) => {
     setGenerationIndexActive(index);
   };
 
-  const handleLoadGeneration = useCallback(
-    (url: string) => {
-      makeGetRequest(url).then(response => {
-        if (response && response.pokemon_species && response.pokemon_species.length > 0) {
-          let idList: string[] = [];
+  const handleLoadGeneration = useCallback((url: string) => {
+    makeGetRequest(url).then(response => {
+      if (response && response.pokemon_species && response.pokemon_species.length > 0) {
+        let idList: string[] = [];
 
-          const newSpeciesList = response.pokemon_species.map((specie: SpeciesI) => {
-            const urlArr = specie.url.split('/');
-            const pokeId = urlArr[urlArr.length - 2];
-            idList = [...idList, pokeId];
+        const newSpeciesList = response.pokemon_species.map((specie: SpeciesI) => {
+          const urlArr = specie.url.split('/');
+          const pokeId = urlArr[urlArr.length - 2];
+          idList = [...idList, pokeId];
 
-            return {
-              ...specie,
-              picture: (
-                <img
-                  width={60}
-                  height={60}
-                  src={`https://pokeres.bastionbot.org/images/pokemon/${pokeId}.png`}
-                  alt={specie.name}
-                />
-              ),
-              id: pokeId
-            };
-          });
-          handlePictureList(idList);
-          console.log('newSpeciesList', newSpeciesList);
-          setSpeciesList(newSpeciesList);
-        }
-      });
-    },
-    [handlePictureList]
-  );
+          return {
+            ...specie,
+            picture: (
+              <img
+                width={60}
+                height={60}
+                src={`https://pokeres.bastionbot.org/images/pokemon/${pokeId}.png`}
+                alt={specie.name}
+              />
+            ),
+            id: pokeId
+          };
+        });
+        setSpeciesList(newSpeciesList);
+      }
+    });
+  }, []);
 
   useEffect(() => {
-    console.log('pictureList', pictureList);
     if (generationsList.length === 0 && !speciesList[0].name) {
       getGenerations().then(response => {
         setGenerationsList(response.results);
         handleLoadGeneration(defaultGenerationUrl);
       });
     }
-  }, [generationsList.length, handleLoadGeneration, pictureList, speciesList]);
+  }, [generationsList.length, handleLoadGeneration, speciesList]);
 
   const handleClickGeneration = (url: string, index: number) => {
     handleLoadGeneration(url);
@@ -105,7 +87,6 @@ const Home = () => {
 
   const handleClickSpecie = (url: string) => {
     makeGetRequest(url).then(response => {
-      console.log('response', response);
       const {
         color,
         name,
