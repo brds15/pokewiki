@@ -7,7 +7,8 @@ import {
   Label,
   Value,
   ContentContainer,
-  Wrapper
+  Wrapper,
+  ColorCircle
 } from './Styles';
 import { DetailContext } from '../../context/DetailProvider';
 import colors from '../../styles/colors';
@@ -28,7 +29,7 @@ export const Detail = () => {
           <ContentContainer>
             <BoxContainer>
               <Label>{t('color')}</Label>
-              <Value>{data.color}</Value>
+              <ColorCircle color={data.color} />
             </BoxContainer>
 
             <BoxContainer>

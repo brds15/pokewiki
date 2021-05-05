@@ -2,6 +2,10 @@ import styled from 'styled-components';
 import { ReactComponent as HoldSVG } from '../../images/minus.svg';
 import colors from '../../styles/colors';
 
+interface ColorCircleI {
+  color: string;
+}
+
 export const ResizeContainer = styled.div`
   width: 100%;
   display: flex;
@@ -18,6 +22,13 @@ export const DetailContainer = styled.div`
   height: 20vh;
   border-radius: 26px 26px 0 0;
   text-transform: capitalize;
+`;
+
+export const ColorCircle = styled.div<ColorCircleI>`
+  background-color: ${props => props.color};
+  padding: 1rem;
+  border-radius: 100%;
+  margin-top: 3px;
 `;
 
 export const Wrapper = styled.div`
