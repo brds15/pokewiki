@@ -1,5 +1,5 @@
 import React, { createContext, FC, useState } from 'react';
-import { DetailContextState } from './types';
+import { DetailContextState, DetailObject } from './types';
 
 const contextDefaultValues: DetailContextState = {
   data: {
@@ -12,7 +12,8 @@ const contextDefaultValues: DetailContextState = {
     happiness: 0,
     habitat: ''
   },
-  changeData: () => {}
+  changeData: () => {},
+  changeAll: () => {}
 };
 
 export const DetailContext = createContext<DetailContextState>(contextDefaultValues);
@@ -20,12 +21,14 @@ export const DetailContext = createContext<DetailContextState>(contextDefaultVal
 const DetailProvider: FC = ({ children }) => {
   const [data, setData] = useState(contextDefaultValues.data);
   const changeData = (key: string, newValue: string) => setData({ ...data, [key]: newValue });
+  const changeAll = (detailObj: DetailObject) => setData(detailObj);
 
   return (
     <DetailContext.Provider
       value={{
         data,
-        changeData
+        changeData,
+        changeAll
       }}
     >
       {children}
