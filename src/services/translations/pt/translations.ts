@@ -3,5 +3,14 @@ export const TRANSLATIONS_PT = {
   generations: 'Gerações',
   species: 'Espécies',
   generalApiError: 'Alguma coisa deu errado ...',
-  generation: 'Geração'
+  generation: 'Geração',
+  color: 'Cor',
+  captureRate: 'Taxa de Captura',
+  isBaby: 'Filhote?',
+  isLegendary: 'Lendario',
+  name: 'Nome',
+  happiness: 'Humor',
+  habitat: 'Habitat',
+  yes: 'Yes',
+  no: 'No'
 };

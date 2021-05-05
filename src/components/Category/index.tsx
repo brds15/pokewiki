@@ -1,17 +1,18 @@
 import React from 'react';
-import { Wrapper, TitleContainer, Title, ListContainer } from './Styles';
+import { ListContainer, Title, TitleContainer, Wrapper } from './Styles';
 
 interface CategoryProps {
   title: string;
   children: JSX.Element[] | JSX.Element;
+  color?: string;
 }
 
 const Category = (props: CategoryProps) => {
-  const { title, children } = props;
+  const { title, children, color } = props;
   return (
     <Wrapper>
       <TitleContainer>
-        <Title>{title}</Title>
+        <Title color={color}>{title}</Title>
       </TitleContainer>
       <ListContainer>{children}</ListContainer>
     </Wrapper>

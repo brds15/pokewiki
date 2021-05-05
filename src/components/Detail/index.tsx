@@ -1,25 +1,63 @@
 import React, { useContext } from 'react';
-import { DetailContainer, HoldIcon, ResizeContainer } from './Styles';
+import {
+  DetailContainer,
+  HoldIcon,
+  ResizeContainer,
+  BoxContainer,
+  Label,
+  Value,
+  ContentContainer,
+  Wrapper
+} from './Styles';
 import { DetailContext } from '../../context/DetailProvider';
+import colors from '../../styles/colors';
+import Category from '../Category';
+import { useTranslation } from 'react-i18next';
 
 export const Detail = () => {
   const { data } = useContext(DetailContext);
+  const { t } = useTranslation();
 
   return data && data.name ? (
     <DetailContainer>
       <ResizeContainer>
         <HoldIcon />
       </ResizeContainer>
-      <div>
-        <span>color {data.color}</span>
-        <span>captureRate {data.captureRate}</span>
-        <span>id {data.id}</span>
-        <span>isBaby {data.isBaby}</span>
-        <span>isLegendary {data.isLegendary}</span>
-        <span>name {data.name}</span>
-        <span>happiness {data.happiness}</span>
-        <span>habitat {data.habitat}</span>
-      </div>
+      <Wrapper>
+        <Category color={colors.orange} title={`#${data.id} ${data.name}`}>
+          <ContentContainer>
+            <BoxContainer>
+              <Label>{t('color')}</Label>
+              <Value>{data.color}</Value>
+            </BoxContainer>
+
+            <BoxContainer>
+              <Label>{t('captureRate')}</Label>
+              <Value>{data.captureRate}</Value>
+            </BoxContainer>
+
+            <BoxContainer>
+              <Label>{t('isBaby')}</Label>
+              <Value>{data.isBaby ? t('yes') : t('no')}</Value>
+            </BoxContainer>
+
+            <BoxContainer>
+              <Label>{t('isLegendary')}</Label>
+              <Value>{data.isLegendary ? t('yes') : t('no')}</Value>
+            </BoxContainer>
+
+            <BoxContainer>
+              <Label>{t('happiness')}</Label>
+              <Value>{data.happiness}</Value>
+            </BoxContainer>
+
+            <BoxContainer>
+              <Label>{t('habitat')}</Label>
+              <Value>{data.habitat}</Value>
+            </BoxContainer>
+          </ContentContainer>
+        </Category>
+      </Wrapper>
     </DetailContainer>
   ) : (
     <></>
