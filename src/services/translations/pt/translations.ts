@@ -11,6 +11,6 @@ export const TRANSLATIONS_PT = {
   name: 'Nome',
   happiness: 'Humor',
   habitat: 'Habitat',
-  yes: 'Yes',
-  no: 'No'
+  yes: 'Sim',
+  no: 'Não'
 };
